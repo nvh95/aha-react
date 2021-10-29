@@ -26,22 +26,20 @@ export function createRollupConfig(options, callback) {
       exports: 'named',
     },
     plugins: [
-      resolve({
-        extensions: ['.js', 'jsx'],
-      }),
+      external(),
       babel({
         babelHelpers: 'runtime',
         // skipPreflightCheck: true,
         exclude: '**/node_modules/**',
       }),
+      resolve({
+        extensions: ['.js', 'jsx'],
+      }),
       commonjs(),
-
-      external(),
       // typescript({
       //   tsconfig: options.tsconfig,
       //   clean: true,
       // }),
-
       sourcemaps(),
       options.format !== 'esm' &&
         terser({
